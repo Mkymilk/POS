@@ -39,11 +39,3 @@ src/
 ├── models/              # Data models (Product, Order, OrderItem)
 └── services/            # Business logic (ProductService, OrderService)
 ```
-
-### 📝 License
-
-MIT
-
----
-
-เอาไปแปะใน README.md หรือ About section ของ GitHub repo ได้เลยครับ! 🎉
