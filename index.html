@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café POS System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">☕</span>
+        <h1>Café POS</h1>
+      </div>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="pos">
+          <span class="tab-icon">🛒</span>
+          <span class="tab-label">Point of Sale</span>
+        </button>
+        <button class="nav-tab" data-tab="products">
+          <span class="tab-icon">📦</span>
+          <span class="tab-label">Products</span>
+        </button>
+        <button class="nav-tab" data-tab="summary">
+          <span class="tab-icon">📊</span>
+          <span class="tab-label">Sales Summary</span>
+        </button>
+        <button class="nav-tab" data-tab="settings">
+          <span class="tab-icon">⚙️</span>
+          <span class="tab-label">Settings</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- POS Tab -->
+      <div id="posTab" class="tab-content active">
+        <div class="pos-layout">
+          <!-- Product Grid -->
+          <section class="product-section">
+            <h2 class="section-title">Menu</h2>
+            <div id="productGrid" class="product-grid">
+              <!-- Products rendered by JS -->
+            </div>
+          </section>
+
+          <!-- Cart Section -->
+          <aside class="cart-section">
+            <div class="cart-header">
+              <h2>Current Order</h2>
+              <span class="cart-badge" id="cartItemCount">0</span>
+            </div>
+            <div id="cartItems" class="cart-items">
+              <div class="empty-cart">Cart is empty</div>
+            </div>
+            <div class="cart-footer">
+              <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cartTotal" class="cart-total">฿0.00</span>
+              </div>
+              <div class="cart-actions">
+                <button id="clearCartBtn" class="btn btn-secondary">Clear</button>
+                <button id="checkoutBtn" class="btn btn-primary" disabled>Checkout</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Products Management Tab -->
+      <div id="productsTab" class="tab-content">
+        <div class="products-management">
+          <div class="management-header">
+            <h2>Product Management</h2>
+            <button id="addProductBtn" class="btn btn-primary">
+              <span>+</span> Add Product
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody">
+                <!-- Products rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Summary Tab -->
+      <div id="summaryTab" class="tab-content">
+        <div class="summary-section">
+          <div class="summary-header">
+            <h2>Daily Sales Summary</h2>
+            <div class="summary-date">
+              <span id="summaryDate"></span>
+              <button id="resetSummaryBtn" class="btn btn-danger">Reset Daily Summary</button>
+            </div>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="summary-cards">
+            <div class="summary-card revenue">
+              <div class="card-icon">💰</div>
+              <div class="card-content">
+                <h3>Total Revenue</h3>
+                <p id="totalRevenue">฿0.00</p>
+              </div>
+            </div>
+            <div class="summary-card orders">
+              <div class="card-icon">📋</div>
+              <div class="card-content">
+                <h3>Total Orders</h3>
+                <p id="totalOrders">0</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Sales Table -->
+          <div class="sales-breakdown">
+            <h3>Product Sales Breakdown</h3>
+            <div class="table-container">
+              <table class="sales-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity Sold</th>
+                    <th>Unit Price</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="salesTableBody">
+                  <tr>
+                    <td colspan="4" class="empty-table">No sales today</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="recent-orders">
+            <h3>Recent Orders</h3>
+            <div id="recentOrders" class="orders-list">
+              <div class="empty-orders">No orders today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Settings Tab -->
+      <div id="settingsTab" class="tab-content">
+        <div class="settings-section">
+          <div class="settings-header">
+            <h2>Settings</h2>
+          </div>
+          <div class="settings-form-container">
+            <form id="settingsForm" class="settings-form">
+              <div class="form-group">
+                <label for="posName">POS Name</label>
+                <input type="text" id="posName" name="posName" placeholder="Enter POS name" value="Café POS">
+                <small>This will be displayed in the header</small>
+              </div>
+              <div class="form-group">
+                <label for="browserTitle">Browser Title</label>
+                <input type="text" id="browserTitle" name="browserTitle" placeholder="Enter browser title" value="Café POS System">
+                <small>This will be displayed in the browser tab</small>
+              </div>
+              <div class="form-group">
+                <label for="logoIcon">Logo Icon (Emoji)</label>
+                <input type="text" id="logoIcon" name="logoIcon" placeholder="Enter emoji" value="☕" maxlength="2">
+                <small>Enter an emoji for the logo</small>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Settings</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Product</h2>
+        <button id="closeModal" class="close-btn">&times;</button>
+      </div>
+      <form id="productForm" class="product-form">
+        <div class="form-group">
+          <label for="productName">Product Name *</label>
+          <input type="text" id="productName" name="productName" required placeholder="Enter product name">
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Price (฿) *</label>
+          <input type="number" id="productPrice" name="productPrice" required min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-group">
+          <label for="productImage">Image URL</label>
+          <input type="url" id="productImage" name="productImage" placeholder="https://example.com/image.jpg">
+        </div>
+        <div class="form-group">
+          <label for="productCategory">Category</label>
+          <input type="text" id="productCategory" name="productCategory" placeholder="e.g., Coffee, Tea, Juice">
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelProduct" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
